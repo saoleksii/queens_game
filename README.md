@@ -43,58 +43,9 @@ This launches the pygame window with the built-in puzzle.
 - **Reset** button: restart the solver from the beginning
 - **Back** button: return to menu
 
-## Project Structure
-
-```
-queens/
-  __init__.py
-  board.py           Core board model: Level (regions), BoardState (queens/marks), conflict detection
-  solver.py          Backtracking solver with step-by-step generation
-  game.py            GameSession: player interaction, undo/redo, timer
-  ui/
-    __init__.py
-    app.py           Main pygame application and event loop
-    renderer.py      Drawing logic: board, queens, marks, regions, UI elements
-    scenes.py        Scene classes: Menu, Play, Solver visualization, Win screen
-
-tests/
-  test_board.py      28 tests for Level and BoardState
-  test_solver.py     18 tests for Solver and step generation
-  test_game.py       21 tests for GameSession
-
-main.py             Entry point for the game
-requirements.txt    Dependencies (pygame)
-README.md           This file
-CLAUDE.md           Project documentation and development guidelines
-```
-
-## Testing
-
-Run all tests:
-```bash
-python -m unittest discover tests
-```
-
-Run a specific test module:
-```bash
-python -m unittest tests.test_board
-```
-
-Total: 106 unit tests covering all core components.
-
 ## Algorithm
 
 ### Solver (Backtracking)
-
-The solver implements row-by-row backtracking with constraint-based pruning:
-
-1. **Row-by-row processing**: tries to place one queen in each row
-2. **Constraint checking**: before placing, verifies:
-   - Column not already occupied
-   - Region doesn't already have a queen
-   - No adjacent queens (8-way: orthogonal + diagonal)
-3. **Backtracking**: if a row has no valid placements, undoes the previous placement and tries alternatives
-4. **Step generation**: each placement or backtrack is recorded as a `Step` for visualization
 
 Complexity: exponential worst-case, but heavily pruned by constraints.
 
